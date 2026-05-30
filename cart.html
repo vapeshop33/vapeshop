@@ -20,22 +20,22 @@
 
 <section class="page-header"><div class="container">
 <h1 class="page-header__title">Корзина</h1>
+<p class="page-header__subtitle">Проверьте ваш заказ перед оформлением</p>
 </div></section>
 
 <section class="section"><div class="container">
 <div class="cart-layout">
-<div class="cart-items" id="cartItems">
-<div class="cart-empty"><div class="cart-empty__icon">🛒</div><h2 class="cart-empty__title">Корзина пуста</h2><p class="cart-empty__text">Добавьте товары из каталога</p><a href="catalog.html" class="btn btn--primary">В каталог</a></div>
+<div>
+<div id="cartItems"></div>
 </div>
-<aside class="cart-summary" id="cartSummary">
-<h3 class="cart-summary__title">Итого</h3>
+<div class="cart-summary">
+<h3 class="cart-summary__title">Сумма заказа</h3>
 <div class="cart-summary__row"><span>Товаров:</span><span id="cartTotalItems">0</span></div>
-<div class="cart-summary__row cart-summary__row--total"><span>Сумма:</span><span id="cartTotalPrice">0 ₽</span></div>
-<button class="btn btn--primary btn--full" id="checkoutBtn">Оформить заказ</button>
-<button class="btn btn--outline btn--full" id="clearCartBtn">Очистить</button>
-</aside>
+<div class="cart-summary__row cart-summary__row--total"><span>Итого:</span><span id="cartTotalPrice">0 ₽</span></div>
+<button class="btn btn--primary btn--full" id="checkoutBtn" style="margin-bottom:6px">Оформить заказ</button>
+<button class="btn btn--outline btn--full btn--sm" id="clearCartBtn">Очистить корзину</button>
 </div>
-</div></section>
+</div></div></section>
 
 <div class="modal" id="orderModal"><div class="modal__overlay"></div>
 <div class="modal__content">
@@ -44,6 +44,7 @@
 <form id="orderForm">
 <div class="form-group"><label class="form-label">Имя</label><input type="text" class="form-input" id="orderName" required></div>
 <div class="form-group"><label class="form-label">Телефон</label><input type="tel" class="form-input" id="orderPhone" required placeholder="+7 (___) ___-__-__"></div>
+<div class="form-group"><label class="form-label">Telegram / ВКонтакте (необязательно)</label><input type="text" class="form-input" id="orderSocial" placeholder="@username или ссылка"></div>
 <div class="form-group"><label class="form-label">Комментарий</label><textarea class="form-input" id="orderComment" rows="2"></textarea></div>
 <div class="form-group">
 <label class="form-label">Способ получения</label>
