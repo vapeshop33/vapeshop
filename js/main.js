@@ -11,29 +11,17 @@ function toast(msg, type = 'success') {
 function renderProducts(products, containerId) {
     const c = document.getElementById(containerId); if (!c) return
     if (!products || products.length === 0) { c.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text2)">Товары не найдены</div>'; return }
-    c.innerHTML = products.map(p => `<div class="product-card" onclick="addToCart('${p.id}')"><div class="product-card__image">${p.emoji}</div><div class="product-card__category">${{coils:'Испарители и картриджи',pod:'Устройства и одноразки',liquid:'Жидкости',accessories:'Аксессуары'}[p.category]||p.category}</div><div class="product-card__title">${p.name}</div><div class="product-card__description">${p.description || p.descr || ''}</div><div class="product-card__footer"><div><div class="product-card__price">${p.price} ₽</div>${p.priceOpt ? `<div class="product-card__price-opt">Опт: ${p.priceOpt} ₽</div>` : ''}</div></div></div>`).join('')
+    c.innerHTML = products.map(p => `<div class="product-card" onclick="addToCart('${p.id}')"><div class="product-card__image">${p.emoji}</div><div class="product-card__category">${{coil:'Испарители и картриджи',device:'Устройства',disposable:'Одноразки',liquid:'Жидкости',drip:'Шайбы',booster:'Бустеры',battery:'АКБ'}[p.category]||p.category}</div><div class="product-card__title">${p.name}</div><div class="product-card__description">${p.description || p.descr || ''}</div><div class="product-card__footer"><div><div class="product-card__price">${p.price} ₽</div>${p.priceOpt ? `<div class="product-card__price-opt">Опт: ${p.priceOpt} ₽</div>` : ''}</div></div></div>`).join('')
 }
 function addToCart(productId, qty = 1) {
-    const p = products.find(x => x.id === productId); if (!p) return
-    const existing = cart.find(i => i.id === productId)
+    const p = products.find(x => x.id == productId); if (!p) return
+    const existing = cart.find(i => i.id == productId)
     if (existing) { existing.qty += qty } else { cart.push({ id: productId, qty, name: p.name, price: p.price, emoji: p.emoji }) }
     saveCart(); toast(`${p.emoji} ${p.name} — в корзине`)
-    const btn = event?.target?.closest('.product-card') || document.querySelector(`[onclick*="'${productId}'"]`)
-    if (btn) { const rect = btn.getBoundingClientRect(); flyToCart(rect.left + rect.width / 2, rect.top + rect.height / 2, p.emoji) }
 }
-function flyToCart(x, y, emoji) {
-    const el = document.createElement('div'); el.className = 'fly-to-cart'; el.textContent = emoji
-    el.style.left = x + 'px'; el.style.top = y + 'px'
-    const target = document.querySelector('.cart-count'); if (!target) { el.remove(); return }
-    const tr = target.getBoundingClientRect()
-    el.style.setProperty('--tx', (tr.left + tr.width / 2 - x) + 'px')
-    el.style.setProperty('--ty', (tr.top + tr.height / 2 - y) + 'px')
-    document.body.appendChild(el)
-    el.addEventListener('animationend', () => { el.remove(); document.querySelectorAll('.cart-count').forEach(e => { e.classList.remove('cart-count--bump'); void e.offsetWidth; e.classList.add('cart-count--bump') }) })
-}
-function removeFromCart(productId) { cart = cart.filter(i => i.id !== productId); saveCart(); renderCart() }
+function removeFromCart(productId) { cart = cart.filter(i => i.id != productId); saveCart(); renderCart() }
 function changeQty(productId, delta) {
-    const item = cart.find(i => i.id === productId); if (!item) return
+    const item = cart.find(i => i.id == productId); if (!item) return
     item.qty += delta; if (item.qty <= 0) { removeFromCart(productId); return }
     saveCart(); renderCart()
 }
@@ -119,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (clearCartBtn) clearCartBtn.addEventListener('click', () => { if (cart.length === 0) return; if (confirm('Очистить корзину?')) { clearCart(); toast('Корзина очищена') } })
     const faqItems = document.querySelectorAll('.faq-item')
     faqItems.forEach(item => { item.querySelector('.faq-item__question')?.addEventListener('click', () => item.classList.toggle('faq-item--open')) })
-const contactForm = document.getElementById('contactForm')
+    const contactForm = document.getElementById('contactForm')
     if (contactForm) contactForm.addEventListener('submit', (e) => {
         e.preventDefault()
         const name = document.getElementById('contactName').value.trim()
