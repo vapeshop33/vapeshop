@@ -1,21 +1,21 @@
 const NTFY_TOPIC = 'vapeshop33'
 function sendToNtfy(text) {
-    const f = document.getElementById('ntfyForm')
+    let f = document.getElementById('ntfyForm')
     if (!f) {
         const ifr = document.createElement('iframe')
         ifr.id = 'ntfyFrame'; ifr.name = 'ntfyFrame'
         ifr.style.display = 'none'
         document.body.appendChild(ifr)
-        const fm = document.createElement('form')
-        fm.id = 'ntfyForm'; fm.action = 'https://ntfy.sh/' + NTFY_TOPIC
-        fm.method = 'POST'; fm.target = 'ntfyFrame'
-        fm.style.display = 'none'
+        f = document.createElement('form')
+        f.id = 'ntfyForm'; f.action = 'https://ntfy.sh/' + NTFY_TOPIC
+        f.method = 'POST'; f.target = 'ntfyFrame'
+        f.style.display = 'none'
         const inp = document.createElement('input')
         inp.type = 'hidden'; inp.name = 'message'; inp.id = 'ntfyMsg'
-        fm.appendChild(inp); document.body.appendChild(fm)
+        f.appendChild(inp); document.body.appendChild(f)
     }
     document.getElementById('ntfyMsg').value = text
-    document.getElementById('ntfyForm').submit()
+    f.submit()
 }
 function sendTelegramNotification(name, phone, items, total, comment, delivery) {
     sendToNtfy(`🆕 Новый заказ VapeShop!
