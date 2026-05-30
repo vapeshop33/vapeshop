@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ru"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Корзина — VapeShop_OptTeamBuy_33</title>
+<link rel="stylesheet" href="css/style.css?v=4">
+</head>
+<body>
+<header class="header"><div class="container"><div class="header__inner">
+<a href="index.html" class="logo">VapeShop<span>_OptTeamBuy_33</span></a>
+<nav class="nav" id="nav">
+<a href="index.html" class="nav__link">Главная</a>
+<a href="catalog.html" class="nav__link">Каталог</a>
+<a href="cart.html" class="nav__link nav__link--active">Корзина <span class="cart-count" id="cartCount">0</span></a>
+<a href="contacts.html" class="nav__link">Контакты</a>
+</nav>
+<div style="display:flex;align-items:center;gap:6px">
+<button class="theme-toggle" id="themeToggle">🌙</button>
+<button class="burger" id="burger"><span></span><span></span><span></span></button>
+</div></div></div></header>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<section class="page-header"><div class="container">
+<h1 class="page-header__title">Корзина</h1>
+</div></section>
+
+<section class="section"><div class="container">
+<div class="cart-layout">
+<div class="cart-items" id="cartItems">
+<div class="cart-empty"><div class="cart-empty__icon">🛒</div><h2 class="cart-empty__title">Корзина пуста</h2><p class="cart-empty__text">Добавьте товары из каталога</p><a href="catalog.html" class="btn btn--primary">В каталог</a></div>
+</div>
+<aside class="cart-summary" id="cartSummary">
+<h3 class="cart-summary__title">Итого</h3>
+<div class="cart-summary__row"><span>Товаров:</span><span id="cartTotalItems">0</span></div>
+<div class="cart-summary__row cart-summary__row--total"><span>Сумма:</span><span id="cartTotalPrice">0 ₽</span></div>
+<button class="btn btn--primary btn--full" id="checkoutBtn">Оформить заказ</button>
+<button class="btn btn--outline btn--full" id="clearCartBtn">Очистить</button>
+</aside>
+</div>
+</div></section>
+
+<div class="modal" id="orderModal"><div class="modal__overlay"></div>
+<div class="modal__content">
+<button class="modal__close" id="modalClose">&times;</button>
+<h2 class="modal__title">Оформление заказа</h2>
+<form id="orderForm">
+<div class="form-group"><label class="form-label">Имя</label><input type="text" class="form-input" id="orderName" required></div>
+<div class="form-group"><label class="form-label">Телефон</label><input type="tel" class="form-input" id="orderPhone" required placeholder="+7 (___) ___-__-__"></div>
+<div class="form-group"><label class="form-label">Комментарий</label><textarea class="form-input" id="orderComment" rows="2"></textarea></div>
+<div class="form-group">
+<label class="form-label">Способ получения</label>
+<div class="radio-group">
+<label class="radio-label"><input type="radio" name="delivery" value="pickup" checked onchange="togglePickupTime()"> Самовывоз</label>
+<label class="radio-label"><input type="radio" name="delivery" value="delivery" onchange="togglePickupTime()"> Доставка</label>
+</div></div>
+<div class="form-group" id="pickupTimeGroup"><label class="form-label">Во сколько заберёте?</label><input type="time" class="form-input" id="pickupTime" value="12:00" style="max-width:150px"></div>
+<button type="submit" class="btn btn--primary btn--full">Отправить</button>
+</form>
+</div></div>
+
+<footer class="footer"><div class="container">
+<div class="footer__inner">
+<div><h3>VapeShop_OptTeamBuy_33</h3><p class="footer__text">Оптовая и розничная продажа</p></div>
+<div><h3>Навигация</h3><a href="index.html" class="footer__link">Главная</a><a href="catalog.html" class="footer__link">Каталог</a><a href="cart.html" class="footer__link">Корзина</a><a href="contacts.html" class="footer__link">Контакты</a></div>
+<div><h3>Контакты</h3><p class="footer__text">г. Владимир</p><p class="footer__text">+7 (900) 123-45-67</p></div>
+</div>
+<div class="footer__bottom"><p>&copy; 2026 VapeShop_OptTeamBuy_33</p></div>
+</div></footer>
+
+<script src="js/telegram.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+</body></html>
