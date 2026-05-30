@@ -78,7 +78,8 @@ a{text-decoration:none;color:inherit}
 .catalog-layout{display:grid;grid-template-columns:1fr;gap:16px}
 .catalog-sidebar__title{font-size:.85rem;font-weight:600;margin-bottom:8px;display:none}
 .catalog-sidebar__filters{display:flex;gap:4px;flex-wrap:wrap;padding-bottom:4px}
-.filter-btn{white-space:nowrap;padding:4px 8px;border-radius:6px;background:0 0;border:1px solid var(--border);color:var(--text2);font-size:.68rem;cursor:pointer;transition:all .2s};font-size:.75rem;cursor:pointer;flex-shrink:0;transition:all .2s}
+}
+.filter-btn{white-space:nowrap;padding:4px 8px;border-radius:6px;background:0 0;border:1px solid var(--border);color:var(--text2);font-size:.68rem;cursor:pointer;transition:all .2s}
 .filter-btn--active{background:rgba(0,136,255,.1);border-color:var(--blue);color:var(--neon)}
 .search-input{width:100%;padding:8px 12px;border-radius:8px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:.8rem;outline:0}
 .cart-layout{display:grid;grid-template-columns:1fr;gap:16px}
