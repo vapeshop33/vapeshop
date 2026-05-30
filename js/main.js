@@ -11,7 +11,7 @@ function toast(msg, type = 'success') {
 function renderProducts(products, containerId) {
     const c = document.getElementById(containerId); if (!c) return
     if (!products || products.length === 0) { c.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text2)">Товары не найдены</div>'; return }
-    c.innerHTML = products.map(p => `<div class="product-card" onclick="addToCart('${p.id}')"><div class="product-card__image">${p.emoji}</div><div class="product-card__category">${p.category}</div><div class="product-card__title">${p.name}</div><div class="product-card__description">${p.descr || ''}</div><div class="product-card__footer"><div><div class="product-card__price">${p.price} ₽</div>${p.priceOpt ? `<div class="product-card__price-opt">Опт: ${p.priceOpt} ₽</div>` : ''}</div></div></div>`).join('')
+    c.innerHTML = products.map(p => `<div class="product-card" onclick="addToCart('${p.id}')"><div class="product-card__image">${p.emoji}</div><div class="product-card__category">${{coils:'Испарители и картриджи',pod:'Устройства и одноразки',liquid:'Жидкости',accessories:'Аксессуары'}[p.category]||p.category}</div><div class="product-card__title">${p.name}</div><div class="product-card__description">${p.description || p.descr || ''}</div><div class="product-card__footer"><div><div class="product-card__price">${p.price} ₽</div>${p.priceOpt ? `<div class="product-card__price-opt">Опт: ${p.priceOpt} ₽</div>` : ''}</div></div></div>`).join('')
 }
 function addToCart(productId, qty = 1) {
     const p = products.find(x => x.id === productId); if (!p) return
