@@ -127,9 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = document.getElementById('contactMessage').value.trim()
         if (!name || !phone || !message) { toast('Заполните все поля', 'error'); return }
         const text = `✉️ *Сообщение с сайта*\n\n👤 *Имя:* ${name}\n📞 *Телефон:* ${phone}\n💬 *Сообщение:* ${message}`
-        fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-            method: 'POST', headers: { 'Content-Type': 'text/plain', 'Title': '✉️ Сообщение с сайта', 'Markdown': 'yes' }, body: text
-        }).then(() => { toast('✅ Сообщение отправлено!'); contactForm.reset() }).catch(() => toast('Ошибка отправки', 'error'))
+        const chatId = localStorage.getItem('tgChatId')
+        if (chatId) {
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' })
+            }).then(() => { toast('✅ Сообщение отправлено!'); contactForm.reset() }).catch(() => toast('Ошибка отправки', 'error'))
+        } else { toast('Сначала подключите Telegram на странице Контакты', 'error') }
     })
 })
 function togglePickupTime() {
