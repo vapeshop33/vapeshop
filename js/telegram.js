@@ -1,28 +1,20 @@
 const NTFY_TOPIC = 'vapeshop33'
 function sendTelegramNotification(name, phone, items, total, comment, delivery) {
-    const text = `🆕 *Новый заказ VapeShop!*
-👤 *Имя:* ${name}
-📞 *Телефон:* ${phone}
-📦 *Получение:* ${delivery === 'pickup' ? 'Самовывоз' : 'Доставка'}
+    const text = `🆕 Новый заказ VapeShop!
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+📦 Получение: ${delivery === 'pickup' ? 'Самовывоз' : 'Доставка'}
 
-🛒 *Товары:*
+🛒 Товары:
 ${items.map(i => `${i.emoji} ${i.name} x${i.qty} — ${i.price} ₽`).join('\n')}
 
-💰 *Итого:* ${total} ₽${comment ? `\n\n💬 *Комментарий:* ${comment}` : ''}`
-    fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain', 'Title': '🆕 Новый заказ VapeShop', 'Markdown': 'yes', 'Priority': 'high' },
-        body: text
-    }).catch(() => {})
+💰 Итого: ${total} ₽${comment ? `\n\n💬 Комментарий: ${comment}` : ''}`
+    fetch(`https://ntfy.sh/${NTFY_TOPIC}`, { method: 'POST', body: text }).catch(() => {})
 }
 function sendContactNotification(name, phone, message) {
-    const text = `✉️ *Сообщение с сайта*
-👤 *Имя:* ${name}
-📞 *Телефон:* ${phone}
-💬 *Сообщение:* ${message}`
-    fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain', 'Title': '✉️ Сообщение с сайта', 'Markdown': 'yes' },
-        body: text
-    }).catch(() => {})
+    const text = `✉️ Сообщение с сайта
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+💬 Сообщение: ${message}`
+    fetch(`https://ntfy.sh/${NTFY_TOPIC}`, { method: 'POST', body: text }).catch(() => {})
 }
