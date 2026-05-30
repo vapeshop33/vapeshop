@@ -119,21 +119,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (clearCartBtn) clearCartBtn.addEventListener('click', () => { if (cart.length === 0) return; if (confirm('Очистить корзину?')) { clearCart(); toast('Корзина очищена') } })
     const faqItems = document.querySelectorAll('.faq-item')
     faqItems.forEach(item => { item.querySelector('.faq-item__question')?.addEventListener('click', () => item.classList.toggle('faq-item--open')) })
-    const contactForm = document.getElementById('contactForm')
+const contactForm = document.getElementById('contactForm')
     if (contactForm) contactForm.addEventListener('submit', (e) => {
         e.preventDefault()
         const name = document.getElementById('contactName').value.trim()
         const phone = document.getElementById('contactPhone').value.trim()
         const message = document.getElementById('contactMessage').value.trim()
         if (!name || !phone || !message) { toast('Заполните все поля', 'error'); return }
-        const text = `✉️ *Сообщение с сайта*\n\n👤 *Имя:* ${name}\n📞 *Телефон:* ${phone}\n💬 *Сообщение:* ${message}`
-        const chatId = localStorage.getItem('tgChatId')
-        if (chatId) {
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' })
-            }).then(() => { toast('✅ Сообщение отправлено!'); contactForm.reset() }).catch(() => toast('Ошибка отправки', 'error'))
-        } else { toast('Сначала подключите Telegram на странице Контакты', 'error') }
+        sendContactNotification(name, phone, message)
+        toast('✅ Сообщение отправлено!')
+        contactForm.reset()
     })
 })
 function togglePickupTime() {
