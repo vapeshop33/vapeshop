@@ -1,3 +1,4 @@
+
 let cart = JSON.parse(localStorage.getItem('vapeCart')) || []
 function saveCart() { localStorage.setItem('vapeCart', JSON.stringify(cart)); updateCartUI() }
 function updateCartUI() {
@@ -12,7 +13,7 @@ function renderProducts(products, containerId) {
     const c = document.getElementById(containerId); if (!c) return
     if (!products || products.length === 0) { c.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text2)">Товары не найдены</div>'; return }
     function catName(c) { return {coils:'Испарители',pod:'Устройства',liquid:'Жидкости',accessories:'Аксессуары',disposable:'Одноразки',device:'Устройства',cartridge:'Картриджи',booster:'Бустеры',battery:'АКБ',charger:'Зарядки',drip:'Шайбы',coil:'Испарители'}[c]||c }
-    c.innerHTML = products.map(p => `<div class="product-card" onclick="addToCart('${p.id}')"><div class="product-card__image">${p.emoji}</div><div class="product-card__category">${catName(p.category)}</div><div class="product-card__title">${p.name}</div><div class="product-card__description">${p.description || p.descr || ''}</div><div class="product-card__footer"><div><div class="product-card__price">${p.price} ₽</div>${p.priceOpt ? `<div class="product-card__price-opt">Опт: ${p.priceOpt} ₽</div>` : ''}</div></div></div>`).join('')
+    c.innerHTML = products.map((p,i) => `<div class="product-card" data-category="${p.category}" style="animation-delay:${i*0.04}s" onclick="addToCart('${p.id}')"><div class="product-card__image">${p.emoji}</div><div class="product-card__category">${catName(p.category)}</div><div class="product-card__title">${p.name}</div><div class="product-card__description">${p.description || p.descr || ''}</div><div class="product-card__footer"><div><div class="product-card__price">${p.price} ₽</div>${p.priceOpt ? `<div class="product-card__price-opt">Опт: ${p.priceOpt} ₽</div>` : ''}</div></div></div>`).join('')
 }
 function addToCart(productId, qty = 1) {
     const p = products.find(x => x.id === productId); if (!p) return
@@ -42,7 +43,7 @@ function clearCart() { cart = []; saveCart(); renderCart() }
 function renderCart() {
     const c = document.getElementById('cartItems'); if (!c) return
     if (cart.length === 0) { c.innerHTML = '<div class="cart-empty"><div class="cart-empty__icon">🛒</div><h2 class="cart-empty__title">Корзина пуста</h2><p class="cart-empty__text">Добавьте товары из каталога</p><a href="catalog.html" class="btn btn--primary">В каталог</a></div>'; document.getElementById('cartTotalItems').textContent = '0'; document.getElementById('cartTotalPrice').textContent = '0 ₽'; return }
-        c.innerHTML = products.map((p,i) => `<div class="product-card" data-category="${p.category}" style="animation-delay:${i*0.04}s" onclick="addToCart('${p.id}')"><div class="product-card__image">
+    c.innerHTML = cart.map(i => `<div class="cart-item"><div class="cart-item__image">${i.emoji}</div><div class="cart-item__info"><h3>${i.name}</h3><p>${i.price} ₽ × ${i.qty}</p></div><div class="cart-item__controls"><button class="cart-item__qty-btn" onclick="changeQty('${i.id}',-1)">−</button><span class="cart-item__qty">${i.qty}</span><button class="cart-item__qty-btn" onclick="changeQty('${i.id}',1)">+</button><span class="cart-item__price">${i.price * i.qty} ₽</span><button class="cart-item__remove" onclick="removeFromCart('${i.id}')">✕</button></div></div>`).join('')
     const totalItems = cart.reduce((s, i) => s + i.qty, 0); const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0)
     document.getElementById('cartTotalItems').textContent = totalItems; document.getElementById('cartTotalPrice').textContent = totalPrice.toLocaleString() + ' ₽'
 }
