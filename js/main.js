@@ -110,8 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const phone = document.getElementById('orderPhone').value.trim()
         const social = document.getElementById('orderSocial')?.value?.trim() || ''
         const comment = document.getElementById('orderComment')?.value?.trim() || ''
-        const delivery = document.querySelector('input[name="delivery"]:checked')?.value || 'pickup'
-         if (phone.length !== 11) { toast('Номер должен содержать 11 цифр', 'error'); return }
+                const delivery = document.querySelector('input[name="delivery"]:checked')?.value || 'pickup'
+        if (!name || !phone) { toast('Заполните имя и телефон', 'error'); return }
+        if (phone.length !== 11) { toast('Номер должен содержать 11 цифр', 'error'); return }
         const total = cart.reduce((s, i) => s + i.price * i.qty, 0)
         sendTelegramNotification(name, phone, social, cart, total, comment, delivery)
         toast('✅ Заказ отправлен! Мы свяжемся с вами.')
