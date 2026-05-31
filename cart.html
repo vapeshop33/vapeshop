@@ -43,7 +43,7 @@
 <h2 class="modal__title">Оформление заказа</h2>
 <form id="orderForm">
 <div class="form-group"><label class="form-label">Имя</label><input type="text" class="form-input" id="orderName" required></div>
-<div class="form-group"><label class="form-label">Телефон</label><input type="tel" class="form-input" id="orderPhone" required placeholder="+7 (___) ___-__-__"></div>
+<div class="form-group"><label class="form-label">Телефон</label><input type="text" class="form-input" id="orderPhone" required placeholder="Номер телефона" inputmode="numeric" pattern="[0-9]*" oninput="this.value=this.value.replace(/\D/g,'')"></div>
 <div class="form-group"><label class="form-label">Telegram / ВКонтакте (необязательно)</label><input type="text" class="form-input" id="orderSocial" placeholder="@username или ссылка"></div>
 <div class="form-group"><label class="form-label">Комментарий</label><textarea class="form-input" id="orderComment" rows="2"></textarea></div>
 <div class="form-group">
