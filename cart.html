@@ -44,7 +44,7 @@
 <form id="orderForm">
 <div class="form-group"><label class="form-label">Имя</label><input type="text" class="form-input" id="orderName" required></div>
 <div class="form-group"><label class="form-label">Телефон</label><input type="text" class="form-input" id="orderPhone" required placeholder="11 цифр" inputmode="numeric" pattern="[0-9]{11}" maxlength="11" oninput="this.value=this.value.replace(/\D/g,'').slice(0,11)"></div>
-<div class="form-group"><label class="form-label">Telegram / ВКонтакте (необязательно)</label><input type="text" class="form-input" id="orderSocial" placeholder="@username или ссылка"></div>
+<div class="form-group"><label class="form-label">Telegram / ВК</label><input type="text" class="form-input" id="orderSocial" required placeholder="@username или ссылка"></div>
 <div class="form-group"><label class="form-label">Комментарий</label><textarea class="form-input" id="orderComment" rows="2"></textarea></div>
 <div class="form-group">
 <label class="form-label">Способ получения</label>
