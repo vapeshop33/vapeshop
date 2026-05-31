@@ -42,7 +42,7 @@ function clearCart() { cart = []; saveCart(); renderCart() }
 function renderCart() {
     const c = document.getElementById('cartItems'); if (!c) return
     if (cart.length === 0) { c.innerHTML = '<div class="cart-empty"><div class="cart-empty__icon">🛒</div><h2 class="cart-empty__title">Корзина пуста</h2><p class="cart-empty__text">Добавьте товары из каталога</p><a href="catalog.html" class="btn btn--primary">В каталог</a></div>'; document.getElementById('cartTotalItems').textContent = '0'; document.getElementById('cartTotalPrice').textContent = '0 ₽'; return }
-    c.innerHTML = cart.map(i => `<div class="cart-item"><div class="cart-item__image">${i.emoji}</div><div class="cart-item__info"><h3>${i.name}</h3><p>${i.price} ₽ × ${i.qty}</p></div><div class="cart-item__controls"><button class="cart-item__qty-btn" onclick="changeQty('${i.id}',-1)">−</button><span class="cart-item__qty">${i.qty}</span><button class="cart-item__qty-btn" onclick="changeQty('${i.id}',1)">+</button><span class="cart-item__price">${i.price * i.qty} ₽</span><button class="cart-item__remove" onclick="removeFromCart('${i.id}')">✕</button></div></div>`).join('')
+        c.innerHTML = products.map((p,i) => `<div class="product-card" data-category="${p.category}" style="animation-delay:${i*0.04}s" onclick="addToCart('${p.id}')"><div class="product-card__image">
     const totalItems = cart.reduce((s, i) => s + i.qty, 0); const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0)
     document.getElementById('cartTotalItems').textContent = totalItems; document.getElementById('cartTotalPrice').textContent = totalPrice.toLocaleString() + ' ₽'
 }
