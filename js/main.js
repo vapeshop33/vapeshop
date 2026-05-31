@@ -1,4 +1,3 @@
-
 let cart = JSON.parse(localStorage.getItem('vapeCart')) || []
 function saveCart() { localStorage.setItem('vapeCart', JSON.stringify(cart)); updateCartUI() }
 function updateCartUI() {
@@ -49,6 +48,9 @@ function renderCart() {
 }
 document.addEventListener('DOMContentLoaded', () => {
     updateCartUI()
+    const cats = ['coil','device','disposable','liquid','drip','booster','battery']
+    cats.forEach(c => { const el = document.getElementById('count'+c.charAt(0).toUpperCase()+c.slice(1)); if (el) el.textContent = products.filter(p => p.category === c).length })
+    const countAll = document.getElementById('countAll'); if (countAll) countAll.textContent = products.length
     if (document.getElementById('catalogProducts')) renderProducts(products, 'catalogProducts')
     if (document.getElementById('featuredProducts')) renderProducts(products.filter(p => p.featured).slice(0, 4), 'featuredProducts')
     if (document.getElementById('cartItems')) renderCart()
@@ -110,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const phone = document.getElementById('orderPhone').value.trim()
         const social = document.getElementById('orderSocial')?.value?.trim() || ''
         const comment = document.getElementById('orderComment')?.value?.trim() || ''
-                const delivery = document.querySelector('input[name="delivery"]:checked')?.value || 'pickup'
+        const delivery = document.querySelector('input[name="delivery"]:checked')?.value || 'pickup'
         if (!name || !phone) { toast('Заполните имя и телефон', 'error'); return }
         if (phone.length !== 11) { toast('Номер должен содержать 11 цифр', 'error'); return }
         const total = cart.reduce((s, i) => s + i.price * i.qty, 0)
@@ -128,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault()
         const name = document.getElementById('contactName').value.trim()
         const phone = document.getElementById('contactPhone').value.trim()
-               const message = document.getElementById('contactMessage').value.trim()
+        const message = document.getElementById('contactMessage').value.trim()
         if (!name || !phone || !message) { toast('Заполните все поля', 'error'); return }
         sendContactNotification(name, phone, message)
         toast('✅ Сообщение отправлено!')
