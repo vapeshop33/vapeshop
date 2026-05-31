@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const phone = document.getElementById('contactPhone').value.trim()
         const message = document.getElementById('contactMessage').value.trim()
                if (!name || !phone) { toast('Заполните имя и телефон', 'error'); return }
+               if (!name || !phone) { toast('Заполните имя и телефон', 'error'); return }
         if (phone.length !== 11) { toast('Номер должен содержать 11 цифр', 'error'); return }
         sendContactNotification(name, phone, message)
         toast('✅ Сообщение отправлено!')
